@@ -24,4 +24,5 @@
 @interface SHGridNode : UIView
 
 @property (nonatomic, strong) SHGridNodeModel *nodeModel;
+
 @end

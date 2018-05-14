@@ -33,7 +33,10 @@
 
 - (void)setNodeModel:(SHGridNodeModel *)nodeModel {
     _nodeModel = nodeModel;
-    [_nodeImageView sd_setImageWithURL:[NSURL URLWithString:_nodeModel.imageUrl] placeholderImage:_nodeModel.placeholderImage];
+    
+    [_nodeImageView sd_setImageWithURL:[NSURL URLWithString:_nodeModel.imageUrl] placeholderImage:_nodeModel.placeholderImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+
+    }];
 }
 
 @end

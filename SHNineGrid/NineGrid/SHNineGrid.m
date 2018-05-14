@@ -48,12 +48,16 @@
                 node.nodeModel = [weakSelf.imageModels firstObject];
                 [self addSubview:node];
             }else{
-                CGRect rect;
-                rect.origin = CGPointMake(kGridNodePadding,kGridNodePadding);
-                rect.size = [self sizeWithImage:image];
-                SHGridNode *node = [[SHGridNode alloc] initWithFrame:rect];
-                node.nodeModel = [weakSelf.imageModels firstObject];
-                [self addSubview:node];
+                SHGridNodeModel *model = [self.imageModels firstObject];
+                [sdManager.imageDownloader downloadImageWithURL:[NSURL URLWithString:model.imageUrl] options:nil progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+                } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                    CGRect rect;
+                    rect.origin = CGPointMake(kGridNodePadding,kGridNodePadding);
+                    rect.size = [self sizeWithImage:image];
+                    SHGridNode *node = [[SHGridNode alloc] initWithFrame:rect];
+                    node.nodeModel = [weakSelf.imageModels firstObject];
+                    [self addSubview:node];
+                }];
             }
         }];
     }
